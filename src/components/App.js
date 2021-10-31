@@ -43,7 +43,7 @@ function App() {
   return (
     <>
     <Header />
-    <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onClick={handleCardClick}/>
+    <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
     <Footer />
     <PopupWithForm name='avatar' title='Обновить аватар' isOpen={isEditAvatarPopupOpen} onClose={isPopupClose} onClosePopup={closeAllPopups}>
         <input type="url" className="popup__input" name="link" id="profile-avatar" placeholder="Ссылка на картинку" required />
