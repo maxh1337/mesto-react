@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from '../src/components/App';
 import reportWebVitals from './reportWebVitals';
+import PopupWithForm from './components/PopupWithForm';
+
+
 
 ReactDOM.render(
   <React.StrictMode>
