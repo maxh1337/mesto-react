@@ -22,7 +22,7 @@ function Main(props) {
       console.log(err); // "Что-то пошло не так: ..."
       return [];
     })
-  });
+  }, []);
 
   React.useEffect(() => {
     // запрос в API за карточками мест
@@ -38,9 +38,9 @@ function Main(props) {
 
   function CardList(props) {
     const cards = props.cards;
-    const listCards = cards.map((card) =>
-      <Card card={card} onCardClick={props.onFunctionClick} />
-    );
+    const listCards = cards.map((card) => (
+      <Card card={card} onCardClick={props.onFunctionClick} key={card._id}/>
+    ));
     return (
       <ul className="elements__list">
         {listCards}
