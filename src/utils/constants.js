@@ -8,7 +8,7 @@ export const defaultFormConfig = {
 
 export const esc = "Escape";
 
-export const token = '9eab21a3-6bcd-4139-86b4-ff21b44e07cc';
+export const baseToken = '9eab21a3-6bcd-4139-86b4-ff21b44e07cc';
 
-export const apiUrl = 'https://mesto.nomoreparties.co/v1/cohort-26';
+export const baseUrl = 'https://mesto.nomoreparties.co/v1/cohort-26';
 

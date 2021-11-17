@@ -1,26 +1,29 @@
-import {token} from "../utils/constants";
-import {apiUrl} from "../utils/constants";
+import { 
+  baseUrl,
+  baseToken } from "../utils/constants";
 
-class API {
+// класс для работы с сервером
+ class API {
 
   constructor(url,token) {
     this._url = url;
     this._token = token;
   }
 
-  _checkResponse(res){
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-  }
   // метод инициализации карточек
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: {
         authorization: this._token
       }
-    }).then(this._checkResponse)
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
   }
 
     // метод инициализации данных пользователя
@@ -29,7 +32,14 @@ class API {
       headers: {
         authorization: this._token
       }
-    }).then(this._checkResponse)
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
   }
 
     // сохранение на сервере отредактированных данных пользователя
@@ -41,7 +51,14 @@ class API {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({name, about})
-    }).then(this._checkResponse)
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    }); 
   }
 
     // добавление на сервере новой карточки
@@ -56,7 +73,14 @@ class API {
         name: data.name,
         link: data.link
       })
-    }).then(this._checkResponse)
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    }); 
   }
 
   // метод удаления карточек
@@ -66,7 +90,14 @@ class API {
       headers: {
         authorization: this._token
       }
-    }).then(this._checkResponse)
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
   }
 
   // ставим лайк карточке
@@ -76,7 +107,14 @@ class API {
       headers: {
         authorization: this._token
       }
-    }).then(this._checkResponse)
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+    }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
   }
 
   // метод получения данных карточки
@@ -85,7 +123,14 @@ class API {
       headers: {
         authorization: this._token
       }
-    }).then(this._checkResponse)
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
   }
 
   // метод для обновления аватара пользователя
@@ -97,13 +142,19 @@ class API {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        avatar: data.link
+        avatar: data.avatar
       })
-    }).then(this._checkResponse)
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
+      return Promise.reject(`Что-то пошло не так: ${res.status}`);
+    });
   }
-
 }
 
 // экземпляр класса для работы с сервером
 // API для получение данных
-export const apiData = new API(apiUrl,token); 
+export const apiData = new API(baseUrl,baseToken);
