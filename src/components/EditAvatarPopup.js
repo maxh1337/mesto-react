@@ -1,20 +1,16 @@
 import React from 'react';
 import PopupWithForm from '../components/PopupWithForm';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function EditAvatarPopup(props) {
-
-  // Подписка на контекст
-  const currentUser = React.useContext(CurrentUserContext);
   // avatar должна быть объявлена здесь, чтобы реф мог иметь к ней доступ
-  const avatarLink = React.useRef('');
+  const avatarLink = React.useRef(null);
 
   function handleSubmit(e) {
     e.preventDefault();
     
-    avatarLink.current.focus(); 
-    currentUser.avatar = avatarLink.current.value;
-    props.onUpdateAvatar(currentUser);
+    props.onUpdateAvatar({
+      avatar: avatarLink.current.value,
+    });
   } 
 
   return(
