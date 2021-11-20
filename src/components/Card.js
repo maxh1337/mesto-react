@@ -1,21 +1,18 @@
 import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card(props) {
-
-  handleClick = handleClick.bind(this);
-  handleLikeClick = handleLikeClick.bind(this);
-  handleDeleteClick = handleDeleteClick.bind(this);
-
   // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = props.card.owner._id === props.currentUser._id;
+  const currentUser = React.useContext(CurrentUserContext)
+  const isOwn = props.card.owner._id === currentUser._id;
 
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
   const cardDeleteButtonClassName = (
-  ` ${isOwn ? 'element__trash-button' : 'element__trash-button_hidden'}`
+  ` ${isOwn ? 'element__trash-button' : 'element__trash-button_visible'}`
   ); 
 
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-  const isLiked = props.card.likes.some(i => i._id === props.currentUser._id);
+  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
 
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = (
@@ -27,7 +24,7 @@ function Card(props) {
   } 
 
   function handleLikeClick()  {
-    props.onCardLike(props.card, props.currentUser,  props.setCards);
+    props.onCardLike(props.card, currentUser,  props.setCards);
   }
 
   function handleDeleteClick()  {

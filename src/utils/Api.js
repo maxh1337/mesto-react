@@ -10,20 +10,19 @@ import {
     this._token = token;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Что-то пошло не так: ${res.status}`);
+  }
   // метод инициализации карточек
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: {
         authorization: this._token
       }
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    });
+    }).then(this._checkResponse)
   }
 
     // метод инициализации данных пользователя
@@ -32,14 +31,7 @@ import {
       headers: {
         authorization: this._token
       }
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    });
+    }).then(this._checkResponse)
   }
 
     // сохранение на сервере отредактированных данных пользователя
@@ -51,14 +43,7 @@ import {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({name, about})
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    }); 
+    }).then(this._checkResponse)
   }
 
     // добавление на сервере новой карточки
@@ -73,14 +58,7 @@ import {
         name: data.name,
         link: data.link
       })
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    }); 
+    }).then(this._checkResponse) 
   }
 
   // метод удаления карточек
@@ -90,14 +68,7 @@ import {
       headers: {
         authorization: this._token
       }
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    });
+    }).then(this._checkResponse)
   }
 
   // ставим лайк карточке
@@ -107,14 +78,7 @@ import {
       headers: {
         authorization: this._token
       }
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-    }
-    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    });
+    }).then(this._checkResponse)
   }
 
   // метод получения данных карточки
@@ -123,14 +87,7 @@ import {
       headers: {
         authorization: this._token
       }
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    });
+    }).then(this._checkResponse)
   }
 
   // метод для обновления аватара пользователя
@@ -144,14 +101,7 @@ import {
       body: JSON.stringify({
         avatar: data.avatar
       })
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    // отклоняем промис, чтобы перейти в блок catch, если сервер вернул ошибку
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    });
+    }).then(this._checkResponse)
   }
 }
 

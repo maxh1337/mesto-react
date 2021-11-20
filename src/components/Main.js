@@ -12,16 +12,17 @@ function Main(props) {
 
   function CardList(props) {
     const cards = props.cards;
-    const listCards = cards.map((card) => 
+
+    const listCards = cards.map((card) => (
       <Card card={card} onCardClick={props.onCardClick} key={card._id}
-      currentUser={userData} onCardLike={props.onCardLike} setCards={props.setCards}
+      onCardLike={props.onCardLike} setCards={props.setCards}
       onCardDelete={props.onCardDelete}/>
-    );
-    return (
-      <ul className="elements__list">
-        {listCards}
-      </ul>
-    );
+      ));
+      return(
+        <ul className="elements__list">
+          {listCards}
+        </ul>
+      );
   }
     return(
         <main className="content">
@@ -36,7 +37,7 @@ function Main(props) {
           </div>
           <button onClick={props.onAddPlace} type="button" className="profile__add-button"/>
         </section>
-            <CardList cards={cardsData} onCardClick={props.onCardClick} onCardLike={props.onCardLike} setCards={props.setCards} onCardDelete={props.onCardDelete}/>
+          <CardList cards={cardsData} onCardClick={props.onCardClick} onCardLike={props.onCardLike} setCards={props.setCards} onCardDelete={props.onCardDelete}/>
       </main>
     )
 }

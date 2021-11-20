@@ -15,9 +15,9 @@ import AddPlacePopup from './AddPlacePopup'
 
 function App() {
   const [selectedCard, setSelectedCard] = React.useState(null);
-  const [isEditProfilePopupOpen, handleEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, handleAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, handleEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [currentCards, setCurrentCards] = React.useState([]);
   
@@ -26,21 +26,21 @@ function App() {
   }
 
   function handleEditAvatarClick() {
-    handleEditAvatarPopupOpen(true);
+    setEditAvatarPopupOpen(true);
   };
   
   function handleEditProfileClick() {
-    handleEditProfilePopupOpen(true);
+    setEditProfilePopupOpen(true);
   };
   
   function handleAddPlaceClick() {
-    handleAddPlacePopupOpen(true);
+    setAddPlacePopupOpen(true);
   };
 
   function closeAllPopups() {
-    handleEditAvatarPopupOpen(false);
-    handleEditProfilePopupOpen(false);
-    handleAddPlacePopupOpen(false);
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
     setSelectedCard(null)
   };
   function handleUpdateUser(user) {
@@ -84,14 +84,14 @@ function App() {
     // Отправляем запрос в API
     apiData.deleteCard(deletedCard._id)
     .then(() => {
-      setCurrentCards((cardsData) => cardsData.filter((c) => {return c._id != deletedCard._id }));
+      setCurrentCards((cardsData) => cardsData.filter((c) => {return c._id !== deletedCard._id }));
     })
     .catch((err) => {
       console.log(err);
       return [];
     });
   } 
-  function handleAddPlaceSubmit(newCard, currentCards) {
+  function handleAddPlaceSubmit(newCard) {
     apiData.postCard(newCard)
     .then((res) => {
       // Создадаем экземпляр карточки
@@ -120,7 +120,6 @@ function App() {
   }, []);
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <>
       <Header />
       <CurrentCardsContext.Provider value={currentCards}>
         <Main onEditProfile={handleEditProfileClick} onCardClick={handleCardClick} 
@@ -134,7 +133,6 @@ function App() {
     <Footer />
     <PopupWithForm name='delete-confirmation' title='Вы уверены?' buttonName='Да' onClosePopup={closeAllPopups}/>
     <ImagePopup card={selectedCard} onClosePopup={closeAllPopups}/>
-</>
 </CurrentUserContext.Provider>
   )};
 export default App;

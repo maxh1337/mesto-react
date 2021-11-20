@@ -11,18 +11,16 @@ function EditAvatarPopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    
     avatarLink.current.focus(); 
     currentUser.avatar = avatarLink.current.value;
     props.onUpdateAvatar(currentUser);
   } 
 
   return(
-    <PopupWithForm name='avatar' title='Обновить аватар' isOpen={props.isOpen}  onClosePopup={props.onClose} onSubmit={handleSubmit} onUpdateAvatar={props.onUpdateAvatar}>
+    <PopupWithForm name='avatar' title='Обновить аватар' isOpen={props.isOpen}  onClosePopup={props.onClose} onSubmit={handleSubmit} onUpdateAvatar={props.onUpdateAvatar} buttonText="Обновить">
         <input ref={avatarLink} type="url" className="popup__input" name="link" id="profile-avatar" placeholder="Ссылка на картинку" required />
         <p className="popup__error" id="profile-avatar-error" />
-        <button type="submit" className="popup__button">
-            Сохранить
-        </button>
     </PopupWithForm>
   );
 }
